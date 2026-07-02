@@ -1,0 +1,40 @@
+.match {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    background-color: var(--accent-hover-bg);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 900px;
+    min-width: 500px;
+}
+
+.match div {
+    display: flex;
+    flex-direction: column;
+}
+
+.match p {
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.match-result {
+    font-weight: bold;
+}
+
+div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hero-image-player {
+    width: 6rem;
+}
+
+.victory {
+    color: rgb(140, 255, 140);
+}
+.defeat {
+    color: rgb(255, 120, 120);
+}

@@ -1,0 +1,14 @@
+.hint {
+    color: var(--text-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hint p {
+    color: var(--text-bg);
+    margin: 0;
+    padding: 0;
+    opacity: 100%;
+}

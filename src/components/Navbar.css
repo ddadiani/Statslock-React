@@ -7,7 +7,6 @@ nav {
     width: fit-content;
     border: 2px solid var(--accent);
     border-radius: 10px;
-    margin-bottom: 6px;
 }
 
 .navbar-button-active {

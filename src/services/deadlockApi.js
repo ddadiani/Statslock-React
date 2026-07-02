@@ -15,6 +15,6 @@ export async function getAllHeroes() {
 
 export async function getPlayerHistory(accountId) {
   const res = await fetch(`${BASE_URL}/v1/players/${accountId}/match-history`);
-  if (!res.ok) throw new Error(`Could not get player history ${accountId}`);
+  if (!res.ok) throw new Error(`Could not get account with AccountID "${accountId}"`);
   return res.json();
 }
