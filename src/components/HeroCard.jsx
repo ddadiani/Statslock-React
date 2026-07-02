@@ -9,7 +9,7 @@ function HeroCard({ hero }) {
     <div id="card">
       <div id="card-left">
         <img id="hero-image" src={hero.images.icon_hero_card_webp} alt="hero image" style={{ borderRadius: '10px' }} />
-        <p className="dynamic-hero-color" id="hero-name" style={{ marginTop: 0, fontSize: '26px' }}>{hero.name}</p>
+        <h3 className="dynamic-hero-color" id="hero-name" style={{ marginTop: 0, fontSize: '26px' }}>{hero.name}</h3>
       </div>
       <div id="card-right">
         <div style={{ display: 'flex', flexDirection: 'column' }}>

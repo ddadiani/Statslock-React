@@ -8,6 +8,7 @@
     max-width: 1000px;
     height: auto;
     padding: 56px;
+    margin-bottom: 20px;
 }
 
 #card-left {
@@ -29,6 +30,22 @@
     text-align: center;
 }
 
+#hero-name {
+    margin: 10px !important;
+}
+
 .lore-small {
     font-size: 0.8rem;
+}
+
+.dynamic-hero-color {
+    color: var(--accent);
+}
+
+@media (max-width: 1000px) {
+    #card {
+        flex-direction: column;
+        gap: 0;
+        margin: 20px;
+    }
 }
