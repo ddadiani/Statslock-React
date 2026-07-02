@@ -1,13 +1,14 @@
 :root {
   --text: #e7e7e7;
+  --text-bg: rgb(231 231 231 / 0.3);
   --bg: #181818;
   --border: #343434;
 
   --accent: #f2c94c;
-  --accent-bg: rgb(90 76 41);
-  --accent-border: #e6be45;
+  --accent-bg: rgb(108 91 47);
+  --accent-border: #c9a73c;
 
-  --accent-hover-bg: rgb(242 201 76 / 0.3);
+  --accent-hover-bg: rgb(172 142 38 / 0.3);
 
   /*TODO need border and accent-border*/
 
@@ -34,6 +35,16 @@
   :root {
   /*TODO Light mode*/
   }
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  margin: 20px 10px;
 }
 
 body {

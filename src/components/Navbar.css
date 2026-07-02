@@ -10,15 +10,22 @@ nav {
     margin-bottom: 6px;
 }
 
+.navbar-button-active {
+    background-color: var(--accent);
+    border-radius: 10px;
+    transition-duration: 200ms;
+    color: var(--bg);
+    z-index: -1;
+}
+
 h2.button {
     font-size: 18px;
-    padding: 20px;
+    padding: 14px 20px;
     margin: 0;
     cursor: pointer;
 }
 
 h2.button.active {
-    background-color: var(--accent);
     border-radius: 10px;
     animation: click-animation 200ms ease;
 }
@@ -28,9 +35,10 @@ h2.button.active {
     border-radius: 10px;
 }
 
-.button:hover {
+.button:hover:not(.navbar-button-active) .button {
     background-color: var(--accent-hover-bg);
     scale: 1.03;
     border-radius: 10px;
     transition-duration: 200ms;
+    z-index: 1;
 }

@@ -1,0 +1,33 @@
+input {
+    background-color: var(--accent-bg);
+    border-radius: 6px;
+    height: 26px;
+    min-width: 160px;
+    font-size: 14px;
+    color: var(--text);
+    border: 1px solid var(--accent-border);
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+input::placeholder {
+    color: var(--text-bg);
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#search-button {
+    padding: 6px;
+    cursor: pointer;
+    width: 23px;
+}
+
+#search-button.active {
+    background-color: var(--accent);
+    border-radius: 10px;
+    animation: click-animation 200ms ease;
+}
