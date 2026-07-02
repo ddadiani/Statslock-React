@@ -1,8 +1,7 @@
 import './HeroCard.css'
 
 function HeroCard({ hero }) {
-
-  const lore = hero.description.lore;
+  const lore = hero.description?.lore ?? "";
   const isLong = lore.length > 600;
 
   return (
@@ -14,15 +13,15 @@ function HeroCard({ hero }) {
       <div id="card-right">
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <h3 className="dynamic-hero-color">Lore</h3>
-          <p id="lore-text" className={`lore-text ${isLong ? "lore-small" : ""}`}>{hero.description.lore}</p>
+          <p id="lore-text" className={`lore-text ${isLong ? "lore-small" : ""}`}>{hero.description.lore || "..."}</p>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <h3 className="dynamic-hero-color">Role</h3>
-          <p id="role-text">{hero.description.role}</p>
+          <p id="role-text">{hero.description.role|| "..."}</p>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <h3 className="dynamic-hero-color">Playstyle</h3>
-          <p id="playstyle-text">{hero.description.playstyle}</p>
+          <p id="playstyle-text">{hero.description.playstyle || "..."}</p>
         </div>
       </div>
     </div>

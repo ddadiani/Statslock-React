@@ -13,6 +13,7 @@ function HeroLookup() {
 
   useEffect(() => {
     getAllHeroes()
+      .then(heroes => heroes.filter(hero => hero.disabled === false))
       .then(setAllHeroes)
       .catch((err) => console.error("Could not load hero list", err));
   }, []);
