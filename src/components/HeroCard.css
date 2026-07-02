@@ -8,12 +8,14 @@
     max-width: 1000px;
     height: auto;
     padding: 56px;
-    margin-bottom: 20px;
+    margin: 10px;
+
 }
 
 #card-left {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 #card-right {
@@ -46,6 +48,16 @@
     #card {
         flex-direction: column;
         gap: 0;
-        margin: 20px;
+        padding: 30px;
+    }
+
+    #hero-image {
+        width: 80%;
+    }
+}
+
+@media (max-width: 500px) {
+    #hero-image {
+        width: 60%;
     }
 }
