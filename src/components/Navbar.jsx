@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <NavLink
-        to="/"
+        to="/match-history"
         className={({ isActive }) => `button ${isActive ? "navbar-button-active" : ""}`}
       >
         <h2 className="button" id="player-lookup-button">Player Match History</h2>
