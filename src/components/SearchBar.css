@@ -38,3 +38,42 @@ input::placeholder {
     border: 1px solid var(--error) !important;
     background-color: var(--error-bg) !important;
 }
+
+/* Search Suggestions */
+.search-input-wrapper {
+    position: relative;
+}
+
+.search-bar-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-top: none;
+    max-height: 240px;
+    overflow-y: auto;
+    z-index: 10;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.search-bar-suggestion-item {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.search-bar-suggestion-item:hover {
+    background: var(--accent-bg) !important;
+    border-left: 2px solid var(--accent-border);
+}
+
+.search-bar-suggestions {
+    scrollbar-width: none; /* Firefox */
+}
+
+.search-bar-suggestions::-webkit-scrollbar {
+    display: none; /* Chrome/Safari/Edge */
+}

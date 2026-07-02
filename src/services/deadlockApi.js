@@ -7,13 +7,13 @@ export async function getHero(heroName) {
   return res.json();
 }
 
-export async function fetchHeroes() {
+export async function getAllHeroes() {
   const res = await fetch(`${BASE_URL}/v1/assets/heroes`);
   if (!res.ok) throw new Error(`Could not get heroes`);
   return res.json();
 }
 
-export async function fetchPlayerHistory(accountId) {
+export async function getPlayerHistory(accountId) {
   const res = await fetch(`${BASE_URL}/v1/players/${accountId}/match-history`);
   if (!res.ok) throw new Error(`Could not get player history ${accountId}`);
   return res.json();

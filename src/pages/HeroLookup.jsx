@@ -1,13 +1,34 @@
 import './HeroLookup.css'
 import SearchBar from "../components/SearchBar.jsx";
 import HeroCard from "../components/HeroCard.jsx";
-import {useState} from "react";
-import {getHero} from "../services/deadlockApi.js";
+import {useEffect, useMemo, useState} from "react";
+import {getAllHeroes, getHero} from "../services/deadlockApi.js";
+import Fuse from 'fuse.js'
 
 function HeroLookup() {
   const [query, setQuery] = useState("");
   const [hero, setHero] = useState(null);
   const [error, setError] = useState(null);
+  const [allHeroes, setAllHeroes] = useState([]);
+
+  useEffect(() => {
+    getAllHeroes()
+      .then(setAllHeroes)
+      .catch((err) => console.error("Could not load hero list", err));
+  }, []);
+
+  const fuse = useMemo(() => {
+    return new Fuse(allHeroes, {
+      keys: ["name"],
+      threshold: 0.2,
+    });
+  }, [allHeroes])
+
+  const results = query ? fuse.search(query) : []
+
+  const displayItems = results.length > 0
+    ? results.map(({ item }) => item)
+    : allHeroes;
 
 
   function handleKeyDown(e) {
@@ -16,7 +37,6 @@ function HeroLookup() {
 
   async function handleSearch() {
     if (!query.trim()) return // Don't do anything if search is empty
-
     setError(null);
     setHero(null);
 
@@ -26,6 +46,24 @@ function HeroLookup() {
     } catch (err) {
       setError(err);
     }
+  }
+
+  async function handleSearchWithHeroName(heroName) {
+    setError(null);
+    setHero(null);
+
+    try {
+      const data = await getHero(heroName.trim());
+      setHero(data);
+    } catch (err) {
+      setError(err);
+    }
+
+  }
+
+  function handleSelectSuggestion(heroName) {
+    setQuery(heroName);
+    handleSearchWithHeroName(heroName);
   }
 
 
@@ -39,6 +77,8 @@ function HeroLookup() {
         onSearch={handleSearch}
         placeholder="Enter hero name..."
         hasError={!!error}
+        suggestions={displayItems}
+        onSelectSuggestion={handleSelectSuggestion}
       />
       {error && <p>{error.message + ". Please enter a valid hero."}</p>}
       {hero && <HeroCard hero={hero}/>}
