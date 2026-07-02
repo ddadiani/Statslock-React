@@ -1,13 +1,14 @@
-input {
+.search-bar input {
     background-color: var(--accent-bg);
     border-radius: 6px;
-    height: 26px;
-    min-width: 160px;
     font-size: 14px;
     color: var(--text);
     border: 1px solid var(--accent-border);
     padding-left: 8px;
     padding-right: 8px;
+    height: 30px;
+    width: 50vw;
+    max-width: 300px;
 }
 
 input::placeholder {
@@ -23,7 +24,7 @@ input::placeholder {
 #search-button {
     padding: 6px;
     cursor: pointer;
-    width: 23px;
+    width: 24px;
 }
 
 #search-button.active {
