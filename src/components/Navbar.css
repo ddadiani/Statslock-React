@@ -30,6 +30,18 @@ h2.button.active {
     animation: click-animation 200ms ease;
 }
 
+#search-button {
+    border-radius: 10px;
+    transition-duration: 200ms;
+}
+
+#search-button:hover {
+    background-color: var(--accent-hover-bg);
+    scale: 1.03;
+    border-radius: 10px;
+    transition-duration: 200ms;
+}
+
 .button {
     transition-duration: 200ms;
     border-radius: 10px;

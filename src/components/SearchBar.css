@@ -19,6 +19,7 @@ input::placeholder {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-bottom: 10px;
 }
 
 #search-button {
@@ -31,4 +32,9 @@ input::placeholder {
     background-color: var(--accent);
     border-radius: 10px;
     animation: click-animation 200ms ease;
+}
+
+.error-input {
+    border: 1px solid var(--error) !important;
+    background-color: var(--error-bg) !important;
 }

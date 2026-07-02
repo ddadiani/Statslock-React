@@ -4,7 +4,6 @@ import './Navbar.css'
 function Navbar() {
   return (
     <nav className="navbar">
-      {/*TODO add highlighting on current page for navbar*/}
       <NavLink
         to="/"
         className={({ isActive }) => `button ${isActive ? "navbar-button-active" : ""}`}

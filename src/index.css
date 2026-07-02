@@ -3,14 +3,14 @@
   --text-bg: rgb(231 231 231 / 0.3);
   --bg: #181818;
   --border: #343434;
+  --error: #c62a18;
+  --error-bg: #6c3c3c;
 
   --accent: #f2c94c;
   --accent-bg: rgb(108 91 47);
   --accent-border: #c9a73c;
 
   --accent-hover-bg: rgb(172 142 38 / 0.3);
-
-  /*TODO need border and accent-border*/
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -58,3 +58,6 @@ a {
   color: var(--text);
 }
 
+p {
+  line-height: 1.2;
+}
