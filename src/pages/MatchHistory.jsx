@@ -6,13 +6,14 @@ import {getAllHeroes, getPlayerHistory} from "../services/deadlockApi.js";
 import MatchCard from "../components/MatchCard.jsx";
 
 function MatchHistory() {
+  const MATCH_COUNT = 20;
   const [query, setQuery] = useState("");
   const [matches, setMatches] = useState(() => {
     return JSON.parse(sessionStorage.getItem("match-history")) || [];
   });
   const [error, setError] = useState(null);
   const [heroMap, setHeroMap] = useState(() => {
-    return JSON.parse(sessionStorage.getItem("heroes")) || {};
+    return JSON.parse(sessionStorage.getItem("hero-map")) || {};
   });
   const [accountId, setAccountId] = useState(() => {
     return localStorage.getItem("steam-account-id") || "";
@@ -24,14 +25,18 @@ function MatchHistory() {
     // If sessionStorage has the heroMap already, don't hit the API
     if (Object.keys(heroMap).length > 0) return;
 
-    getAllHeroes().then((heroes) => {
-      const map = {};
-      heroes.forEach((hero) => {
-        map[hero.id] = hero;
+    getAllHeroes()
+      .then((heroes) => {
+        const map = {};
+        heroes.forEach((hero) => {
+          map[hero.id] = hero;
+        })
+        setHeroMap(map);
+        sessionStorage.setItem("hero-map", JSON.stringify(map));
       })
-      setHeroMap(map);
-      sessionStorage.setItem("heroes", JSON.stringify(map));
-    })
+      .catch((err) => {
+        console.error("Could not load hero map", err);
+      })
   }, [])
 
   // Instantly get match history if there was accountId in local storage
@@ -69,7 +74,7 @@ function MatchHistory() {
         setError(new Error("No history found"));
         return;
       }
-      setMatches(data.slice(0, 50)); // Display matches (50)
+      setMatches(data.slice(0, MATCH_COUNT)); // Display MATCH_COUNT number of matches
       setAccountId(trimmedAccountId); // Set account ID
       localStorage.setItem("steam-account-id", trimmedAccountId); // Save account ID to local storage
       sessionStorage.setItem("match-history", JSON.stringify(data));
@@ -93,7 +98,7 @@ function MatchHistory() {
 
       {matches && matches.length > 0 && (
         <>
-          <p className="hint" style={{ margin: 0 }}>AccountId: {matches[0].account_id}</p>
+          <p className="hint" style={{margin: 0}}>AccountId: {matches[0].account_id}</p>
           <div id="history">
             {matches.map((match) => (
               <MatchCard
@@ -102,11 +107,11 @@ function MatchHistory() {
                 hero={heroMap[match.hero_id]}
               />
             ))}
-            <p className="hint">Last 50 matches loaded</p>
+            <p className="hint">Last {MATCH_COUNT} matches loaded</p>
           </div>
         </>
-          )}
-      <AccountIdSuggestion />
+      )}
+      <AccountIdSuggestion/>
     </>
   )
 }

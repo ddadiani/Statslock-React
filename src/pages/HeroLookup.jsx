@@ -7,16 +7,31 @@ import Fuse from 'fuse.js'
 
 function HeroLookup() {
   const [query, setQuery] = useState("");
-  const [hero, setHero] = useState(null);
+  const [hero, setHero] = useState(() => {
+    return JSON.parse(sessionStorage.getItem("hero-card")) || null;
+  });
   const [error, setError] = useState(null);
-  const [allHeroes, setAllHeroes] = useState([]);
+  const [allHeroes, setAllHeroes] = useState(() => {
+    return JSON.parse(sessionStorage.getItem("all-heroes")) || [];
+  });
+
 
   useEffect(() => {
+    // If sessionStorage has the allHeroes already, don't hit the API
+    if (allHeroes.length > 0) return;
+
     getAllHeroes()
       .then(heroes => heroes.filter(hero => hero.disabled === false))
-      .then(setAllHeroes)
+      .then((filteredHeroes) => {
+        setAllHeroes(filteredHeroes);
+        sessionStorage.setItem("all-heroes", JSON.stringify(filteredHeroes));
+      })
       .catch((err) => console.error("Could not load hero list", err));
   }, []);
+
+  useEffect(() => {
+    if (hero) sessionStorage.setItem("hero-card", JSON.stringify(hero));
+  }, [hero])
 
   const fuse = useMemo(() => {
     return new Fuse(allHeroes, {
@@ -28,7 +43,7 @@ function HeroLookup() {
   const results = query ? fuse.search(query) : []
 
   const displayItems = results.length > 0
-    ? results.map(({ item }) => item)
+    ? results.map(({item}) => item)
     : allHeroes;
 
 
