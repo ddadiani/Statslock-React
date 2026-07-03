@@ -2,8 +2,10 @@ import './SearchBar.css'
 import searchIcon from '../assets/search_icon_white.png'
 import {useState} from "react";
 
-function SearchBar({ query, onChange, onKeyDown, onSearch, onSelectSuggestion,
-                     placeholder, hasError, suggestions = [] }) {
+function SearchBar({
+                     query, onChange, onKeyDown, onClickSearchButton, onSelectSuggestion,
+                     placeholder, hasError, suggestions = []
+                   }) {
   const [isFocused, setIsFocused] = useState(false)
 
   const showSuggestions = isFocused && suggestions.length > 0;
@@ -47,7 +49,7 @@ function SearchBar({ query, onChange, onKeyDown, onSearch, onSelectSuggestion,
         id="search-button"
         src={searchIcon}
         alt="search icon"
-        onClick={() => onSearch()}
+        onClick={onClickSearchButton}
       />
     </div>
   )

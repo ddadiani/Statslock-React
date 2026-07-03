@@ -48,15 +48,19 @@ function HeroLookup() {
 
 
   function handleKeyDown(e) {
-    if (e.key === 'Enter') handleSearch();
+    if (e.key === 'Enter') handleSearch(query);
     else if (e.key === 'Tab') {
       e.preventDefault();
       setQuery(displayItems[0].name);
-      handleSearchWithHeroName(displayItems[0].name);
+      handleSearch(displayItems[0].name);
     }
   }
 
-  async function handleSearch() {
+  function handleClickSearchButton() {
+    handleSearch(query);
+  }
+
+  async function handleSearch(query) {
     if (!query.trim()) return // Don't do anything if search is empty
     setError(null);
     setHero(null);
@@ -69,22 +73,9 @@ function HeroLookup() {
     }
   }
 
-  async function handleSearchWithHeroName(heroName) {
-    setError(null);
-    setHero(null);
-
-    try {
-      const data = await getHero(heroName.trim());
-      setHero(data);
-    } catch (err) {
-      setError(err);
-    }
-
-  }
-
   function handleSelectSuggestion(heroName) {
     setQuery(heroName);
-    handleSearchWithHeroName(heroName);
+    handleSearch(heroName);
   }
 
 
@@ -95,7 +86,7 @@ function HeroLookup() {
         query={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
-        onSearch={handleSearch}
+        onClickSearchButton={handleClickSearchButton}
         placeholder="Enter hero name..."
         hasError={!!error}
         suggestions={displayItems}

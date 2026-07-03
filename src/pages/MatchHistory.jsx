@@ -50,10 +50,14 @@ function MatchHistory() {
   const isValidInt = (str) => /^\d+$/.test(str.trim());
 
   function handleKeyDown(e) {
-    if (e.key === 'Enter') handleSearch();
+    if (e.key === 'Enter') handleSearch(query);
   }
 
-  async function handleSearch(searchId = query) {
+  function handleSearchButton() {
+    handleSearch(query);
+  }
+
+  async function handleSearch(searchId) {
     const trimmedAccountId = searchId.toString().trim();
     // Don't do anything if search is empty
     if (!trimmedAccountId) return
@@ -92,7 +96,7 @@ function MatchHistory() {
         query={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
-        onSearch={handleSearch}
+        onClickSearchButton={handleSearchButton}
         hasError={!!error}
       />
       {error && <p>{error.message}</p>}
