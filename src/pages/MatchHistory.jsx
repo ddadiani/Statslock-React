@@ -11,7 +11,9 @@ function MatchHistory() {
     return JSON.parse(sessionStorage.getItem("match-history")) || [];
   });
   const [error, setError] = useState(null);
-  const [heroMap, setHeroMap] = useState([]);
+  const [heroMap, setHeroMap] = useState(() => {
+    return JSON.parse(sessionStorage.getItem("heroes")) || {};
+  });
   const [accountId, setAccountId] = useState(() => {
     return localStorage.getItem("steam-account-id") || "";
   });
@@ -19,12 +21,16 @@ function MatchHistory() {
   // Get all heroes and keep them in a map
   // Needed to match every different hero per match in match history
   useEffect(() => {
+    // If sessionStorage has the heroMap already, don't hit the API
+    if (Object.keys(heroMap).length > 0) return;
+
     getAllHeroes().then((heroes) => {
       const map = {};
       heroes.forEach((hero) => {
         map[hero.id] = hero;
       })
       setHeroMap(map);
+      sessionStorage.setItem("heroes", JSON.stringify(map));
     })
   }, [])
 
