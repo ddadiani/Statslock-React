@@ -21,13 +21,13 @@ function getMatchResults(match) {
   }
 }
 
-function MatchCard({ match, hero }) {
+function MatchCard({match, hero}) {
   const matchDate = new Date(match.start_time * 1000);
   const kills = match.player_kills;
   const deaths = match.player_deaths;
   const assists = match.player_assists;
   const kda = `${kills} / ${deaths} / ${assists}`;
-  const kdaAverage = (kills+assists) / deaths;
+  const kdaAverage = (kills + assists) / deaths;
 
   const [daysSinceMatch] = useState(() => Math.floor((Date.now() - matchDate) / (1000 * 60 * 60 * 24)))
 
@@ -35,12 +35,14 @@ function MatchCard({ match, hero }) {
   return (
     <div className="match">
       <div>
-        <p className="match-type">{(match.game_mode === 1) ? "Normal" : "Brawl"}</p>
+        <p className="match-type" style={{fontWeight: "bold"}}>{(match.game_mode === 1) ? "Normal" : "Brawl"}</p>
         <p className="days-after-played">{getDaysAgo(daysSinceMatch)}</p>
         <p
           className={"match-result" + (getMatchResults(match) === "Victory" ? " victory" : " defeat")}
         >{getMatchResults(match)}</p>
-        <p className="match-length">{`${Math.floor(match.match_duration_s / 60)}m ${match.match_duration_s % 60}s`}</p>
+        <p className="match-length">
+          {`${Math.floor(match.match_duration_s / 60)}m ${match.match_duration_s % 60}s`}
+        </p>
       </div>
       <div>
         <img src={hero.images.icon_image_small_webp} alt="hero" className="hero-image-player"/>
@@ -48,9 +50,15 @@ function MatchCard({ match, hero }) {
         <p className="kda">KDA: {kda} ({kdaAverage.toPrecision(2)})</p>
       </div>
       <div>
-        <p className="souls">{`Souls: ${(match.net_worth / 1000).toPrecision(3)}K`}</p>
-        <p className="last-hits">{`Last hits: ${match.last_hits} (${(match.last_hits / (match.match_duration_s / 60)).toFixed(1)})`}</p>
-        <p className="denies">{`Denies: ${match.denies}`}</p>
+        <p className="souls">
+          {`Souls: ${(match.net_worth / 1000).toPrecision(3)}K`}
+        </p>
+        <p className="last-hits">
+          {`Last hits: ${match.last_hits} (${(match.last_hits / (match.match_duration_s / 60)).toFixed(1)})`}
+        </p>
+        <p className="denies">
+          {`Denies: ${match.denies}`}
+        </p>
       </div>
     </div>
   )

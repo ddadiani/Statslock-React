@@ -37,7 +37,7 @@ function MatchHistory() {
       .catch((err) => {
         console.error("Could not load hero map", err);
       })
-  }, [])
+  }, [heroMap])
 
   // Instantly get match history if there was accountId in local storage
   useEffect(() => {
@@ -53,13 +53,13 @@ function MatchHistory() {
     if (e.key === 'Enter') handleSearch();
   }
 
-  async function handleSearch(accountId = query) {
-    const trimmedAccountId = accountId.toString().trim();
+  async function handleSearch(searchId = query) {
+    const trimmedAccountId = searchId.toString().trim();
     // Don't do anything if search is empty
     if (!trimmedAccountId) return
     // Check if it's a valid ID
     else if (!isValidInt(trimmedAccountId)) {
-      setError(new Error(`Player with AccountID ${trimmedAccountId} doesn't exist`));
+      setError(new Error(`Player AccountID must be numeric`));
       setMatches([]);
       return;
     }
@@ -74,10 +74,11 @@ function MatchHistory() {
         setError(new Error("No history found"));
         return;
       }
-      setMatches(data.slice(0, MATCH_COUNT)); // Display MATCH_COUNT number of matches
+      const slicedData = data.slice(0, MATCH_COUNT)
+      setMatches(slicedData); // Display MATCH_COUNT number of matches
       setAccountId(trimmedAccountId); // Set account ID
       localStorage.setItem("steam-account-id", trimmedAccountId); // Save account ID to local storage
-      sessionStorage.setItem("match-history", JSON.stringify(data));
+      sessionStorage.setItem("match-history", JSON.stringify(slicedData));
     } catch (err) {
       setError(err);
     }

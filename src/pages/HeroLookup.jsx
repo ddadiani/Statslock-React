@@ -27,7 +27,7 @@ function HeroLookup() {
         sessionStorage.setItem("all-heroes", JSON.stringify(filteredHeroes));
       })
       .catch((err) => console.error("Could not load hero list", err));
-  }, []);
+  }, [allHeroes.length]);
 
   useEffect(() => {
     if (hero) sessionStorage.setItem("hero-card", JSON.stringify(hero));
