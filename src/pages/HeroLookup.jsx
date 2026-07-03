@@ -34,6 +34,11 @@ function HeroLookup() {
 
   function handleKeyDown(e) {
     if (e.key === 'Enter') handleSearch();
+    else if (e.key === 'Tab') {
+      e.preventDefault();
+      setQuery(displayItems[0].name);
+      handleSearchWithHeroName(displayItems[0].name);
+    }
   }
 
   async function handleSearch() {

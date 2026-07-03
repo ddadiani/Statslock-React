@@ -34,7 +34,6 @@ function SearchBar({ query, onChange, onKeyDown, onSearch, onSelectSuggestion,
                 key={hero.id}
                 className="search-bar-suggestion-item"
                 onMouseDown={() => handleSelect(hero.name)}
-
               >
                 {hero.name}
               </li>
