@@ -19,33 +19,6 @@ function MatchHistory() {
     return localStorage.getItem("steam-account-id") || "";
   });
 
-  // Get all heroes and keep them in a map
-  // Needed to match every different hero per match in match history
-  useEffect(() => {
-    // If sessionStorage has the heroMap already, don't hit the API
-    if (Object.keys(heroMap).length > 0) return;
-
-    getAllHeroes()
-      .then((heroes) => {
-        const map = {};
-        heroes.forEach((hero) => {
-          map[hero.id] = hero;
-        })
-        setHeroMap(map);
-        sessionStorage.setItem("hero-map", JSON.stringify(map));
-      })
-      .catch((err) => {
-        console.error("Could not load hero map", err);
-      })
-  }, [heroMap])
-
-  // Instantly get match history if there was accountId in local storage
-  useEffect(() => {
-    if (accountId && !(matches.length > 0)) {
-      handleSearch(accountId);
-    }
-  }, [])
-
   // Simple regex to check valid Account ID
   const isValidInt = (str) => /^\d+$/.test(str.trim());
 
@@ -87,6 +60,34 @@ function MatchHistory() {
       setError(err);
     }
   }
+
+  // Get all heroes and keep them in a map
+  // Needed to match every different hero per match in match history
+  useEffect(() => {
+    // If sessionStorage has the heroMap already, don't hit the API
+    if (Object.keys(heroMap).length > 0) return;
+
+    getAllHeroes()
+      .then((heroes) => {
+        const map = {};
+        heroes.forEach((hero) => {
+          map[hero.id] = hero;
+        })
+        setHeroMap(map);
+        sessionStorage.setItem("hero-map", JSON.stringify(map));
+      })
+      .catch((err) => {
+        console.error("Could not load hero map", err);
+      })
+  }, [heroMap])
+
+  // Instantly get match history if there was accountId in local storage
+  useEffect(() => {
+    if (accountId && !(matches.length > 0)) {
+      handleSearch(accountId);
+    }
+  }, [])
+
 
   return (
     <>

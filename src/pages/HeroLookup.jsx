@@ -15,24 +15,6 @@ function HeroLookup() {
     return JSON.parse(sessionStorage.getItem("all-heroes")) || [];
   });
 
-
-  useEffect(() => {
-    // If sessionStorage has the allHeroes already, don't hit the API
-    if (allHeroes.length > 0) return;
-
-    getAllHeroes()
-      .then(heroes => heroes.filter(hero => hero.disabled === false))
-      .then((filteredHeroes) => {
-        setAllHeroes(filteredHeroes);
-        sessionStorage.setItem("all-heroes", JSON.stringify(filteredHeroes));
-      })
-      .catch((err) => console.error("Could not load hero list", err));
-  }, [allHeroes.length]);
-
-  useEffect(() => {
-    if (hero) sessionStorage.setItem("hero-card", JSON.stringify(hero));
-  }, [hero])
-
   const fuse = useMemo(() => {
     return new Fuse(allHeroes, {
       keys: ["name"],
@@ -45,7 +27,6 @@ function HeroLookup() {
   const displayItems = results.length > 0
     ? results.map(({item}) => item)
     : allHeroes;
-
 
   function handleKeyDown(e) {
     if (e.key === 'Enter') handleSearch(query);
@@ -77,6 +58,23 @@ function HeroLookup() {
     setQuery(heroName);
     handleSearch(heroName);
   }
+
+  useEffect(() => {
+    // If sessionStorage has the allHeroes already, don't hit the API
+    if (allHeroes.length > 0) return;
+
+    getAllHeroes()
+      .then(heroes => heroes.filter(hero => hero.disabled === false))
+      .then((filteredHeroes) => {
+        setAllHeroes(filteredHeroes);
+        sessionStorage.setItem("all-heroes", JSON.stringify(filteredHeroes));
+      })
+      .catch((err) => console.error("Could not load hero list", err));
+  }, [allHeroes.length]);
+
+  useEffect(() => {
+    if (hero) sessionStorage.setItem("hero-card", JSON.stringify(hero));
+  }, [hero])
 
 
   return (
