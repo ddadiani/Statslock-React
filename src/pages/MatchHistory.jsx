@@ -7,7 +7,9 @@ import MatchCard from "../components/MatchCard.jsx";
 
 function MatchHistory() {
   const [query, setQuery] = useState("");
-  const [matches, setMatches] = useState([]);
+  const [matches, setMatches] = useState(() => {
+    return JSON.parse(sessionStorage.getItem("match-history")) || [];
+  });
   const [error, setError] = useState(null);
   const [heroMap, setHeroMap] = useState([]);
   const [accountId, setAccountId] = useState(() => {
@@ -26,8 +28,9 @@ function MatchHistory() {
     })
   }, [])
 
+  // Instantly get match history if there was accountId in local storage
   useEffect(() => {
-    if (accountId) {
+    if (accountId && !(matches.length > 0)) {
       handleSearch(accountId);
     }
   }, [])
@@ -39,13 +42,13 @@ function MatchHistory() {
     if (e.key === 'Enter') handleSearch();
   }
 
-  async function handleSearch(id = query) {
-    const trimmed = id.toString().trim();
+  async function handleSearch(accountId = query) {
+    const trimmedAccountId = accountId.toString().trim();
     // Don't do anything if search is empty
-    if (!trimmed) return
+    if (!trimmedAccountId) return
     // Check if it's a valid ID
-    else if (!isValidInt(trimmed)) {
-      setError(new Error(`Player with AccountID ${trimmed} doesn't exist`));
+    else if (!isValidInt(trimmedAccountId)) {
+      setError(new Error(`Player with AccountID ${trimmedAccountId} doesn't exist`));
       setMatches([]);
       return;
     }
@@ -54,15 +57,16 @@ function MatchHistory() {
     setMatches([]);
 
     try {
-      const data = await getPlayerHistory(trimmed);
+      const data = await getPlayerHistory(trimmedAccountId);
       // If data is empty, which happens when Steam user hasn't played any Deadlock matches
       if (data.length === 0) {
         setError(new Error("No history found"));
         return;
       }
       setMatches(data.slice(0, 50)); // Display matches (50)
-      setAccountId(trimmed); // Set account ID
-      localStorage.setItem("steam-account-id", trimmed); // Save account ID to local storage
+      setAccountId(trimmedAccountId); // Set account ID
+      localStorage.setItem("steam-account-id", trimmedAccountId); // Save account ID to local storage
+      sessionStorage.setItem("match-history", JSON.stringify(data));
     } catch (err) {
       setError(err);
     }
