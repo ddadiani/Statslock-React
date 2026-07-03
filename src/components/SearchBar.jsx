@@ -47,7 +47,7 @@ function SearchBar({ query, onChange, onKeyDown, onSearch, onSelectSuggestion,
         id="search-button"
         src={searchIcon}
         alt="search icon"
-        onClick={onSearch}
+        onClick={() => onSearch()}
       />
     </div>
   )
