@@ -45,6 +45,10 @@ thead th {
     color: var(--bg);
 }
 
+thead tr th {
+    color: #181818;
+}
+
 /* Line Separator for each hero */
 .hero-stat td {
     border-bottom: 1px solid var(--accent);
