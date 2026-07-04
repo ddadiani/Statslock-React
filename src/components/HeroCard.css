@@ -48,13 +48,13 @@
     }
 
     #hero-image {
-        width: 80%;
+        width: 50%;
     }
 }
 
 @media (max-width: 500px) {
     #hero-image {
-        width: 60%;
+        width: 40%;
     }
 }
 

@@ -95,10 +95,14 @@ function HeroTierList() {
                   <img src={heroMap[s.hero_id].images.icon_image_small_webp} alt={heroMap[s.hero_id].name}/>
                   <p>{heroMap[s.hero_id].name}</p>
                 </td>
-                <td>{s.winrate.toFixed(1)}%</td>
+                <td
+                  className={`winrate ${(s.winrate) >= 50 ? "victory" : "defeat"}`}
+                >
+                  {Math.trunc(s.winrate * 10) / 10}%
+                </td>
                 <td>{s.pickrate.toFixed(1)}%</td>
                 <td>{s.avgKda.toFixed(2)}</td>
-                <td>{Math.round(s.wins / 1000)}K / {Math.round(s.losses / 1000)}K</td>
+                <td>{Math.floor(s.wins / 1000)}K / {Math.floor(s.losses / 1000)}K</td>
               </tr>
             ))}
             </tbody>

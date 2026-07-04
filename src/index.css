@@ -13,6 +13,9 @@
     --accent-hover-bg: rgb(172 142 38 / 0.3);
     --accent-hover-card: rgb(172 142 38);
 
+    --victory: rgb(140, 255, 140);
+    --defeat: rgb(255, 120, 120);
+
 
     --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
     --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -53,11 +56,11 @@ p {
 
 
 .victory {
-    color: rgb(140, 255, 140);
+    color: var(--victory);
 }
 
 .defeat {
-    color: rgb(255, 120, 120);
+    color: var(--defeat);
 }
 
 
@@ -76,14 +79,9 @@ p {
 
         --accent-hover-bg: var(--accent-bg);;
         --accent-hover-card: var(--accent);
-    }
 
-    .victory {
-        color: rgb(0 178 0);
-    }
-
-    .defeat {
-        color: rgb(201 0 0);
+        --victory: rgb(0 178 0);
+        --defeat: rgb(201 0 0);
     }
 
     #search-button {
