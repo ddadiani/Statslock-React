@@ -54,7 +54,7 @@ h2.button.active {
     z-index: 1;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 570px) {
     .navbar {
         flex-direction: column;
     }

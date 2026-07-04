@@ -1,0 +1,69 @@
+#tier-list {
+    max-width: 1000px;
+    width: 90%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: var(--accent-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    table-layout: auto;
+}
+
+#tier-list thead {
+    background-color: var(--accent);
+    border-radius: 10px;
+}
+
+#tier-list th,
+#tier-list td {
+    text-align: left;
+    padding: 8px;
+}
+
+.hero-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hero-cell img {
+    width: 24px;
+    height: 24px;
+}
+
+.hero-stat {
+    transition-duration: 200ms;
+}
+
+
+.hero-stat:hover {
+    background-color: var(--accent-hover-card);
+    transition-duration: 200ms;
+}
+
+thead th {
+    color: var(--bg);
+}
+
+/* Line Separator for each hero */
+.hero-stat td {
+    border-bottom: 1px solid var(--accent);
+}
+
+.hero-stat:last-child td {
+    border-bottom: none;
+}
+
+@media (max-width: 520px) {
+    #tier-list {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 400px) {
+    #tier-list {
+        width: 100%;
+        font-size: 0.6rem;
+    }
+}
