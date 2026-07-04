@@ -44,7 +44,6 @@ function HeroTierList() {
         const heroStats = await getHeroStats();
         const totalMatchesJson = await getTotalMatches();
         const totalMatches = totalMatchesJson[0].total_matches;
-        console.log("totalMatches:", totalMatches, typeof totalMatches);
 
         const combined = heroStats.map((s) => (
           {
