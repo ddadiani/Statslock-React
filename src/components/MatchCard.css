@@ -35,6 +35,22 @@ div {
 .victory {
     color: rgb(140, 255, 140);
 }
+
 .defeat {
     color: rgb(255, 120, 120);
+}
+
+@media (max-width: 600px) {
+    .match {
+        padding: 6px;
+        min-width: 350px;
+    }
+
+    .hero-image-player {
+        width: 64px;
+    }
+
+    .match p {
+        font-size: 0.7rem;
+    }
 }
