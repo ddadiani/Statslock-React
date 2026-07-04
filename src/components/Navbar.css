@@ -59,3 +59,9 @@ h2.button.active {
         flex-direction: column;
     }
 }
+
+@media (prefers-color-scheme: light) {
+    .navbar-button-active {
+        color: var(--text);
+    }
+}

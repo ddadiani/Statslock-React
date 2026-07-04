@@ -32,14 +32,6 @@ div {
     width: 6rem;
 }
 
-.victory {
-    color: rgb(140, 255, 140);
-}
-
-.defeat {
-    color: rgb(255, 120, 120);
-}
-
 @media (max-width: 600px) {
     .match {
         padding: 6px;
