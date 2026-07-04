@@ -79,7 +79,7 @@ function MatchHistory() {
       .catch((err) => {
         console.error("Could not load hero map", err);
       })
-  }, [heroMap])
+  }, [])
 
   // Instantly get match history if there was accountId in local storage
   useEffect(() => {
