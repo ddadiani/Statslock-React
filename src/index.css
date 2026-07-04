@@ -11,6 +11,8 @@
     --accent-border: #c9a73c;
 
     --accent-hover-bg: rgb(172 142 38 / 0.3);
+    --accent-hover-card: rgb(172 142 38);
+
 
     --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
     --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -68,11 +70,12 @@ p {
         --error: #c62a18;
         --error-bg: #d99090;
 
-        --accent: #f2c94c;
-        --accent-bg: rgb(241 197 81);
+        --accent: #fbc72b;
+        --accent-bg: rgb(255 215 94 / 0.68);
         --accent-border: #c9a73c;
 
-        --accent-hover-bg: rgb(242 201 76 / 0.9);
+        --accent-hover-bg: var(--accent-bg);;
+        --accent-hover-card: var(--accent);
     }
 
     .victory {

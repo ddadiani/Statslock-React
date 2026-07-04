@@ -6,6 +6,7 @@
     border-radius: 10px;
     max-width: 900px;
     min-width: 500px;
+    transition-duration: 200ms;
 }
 
 .match div {
@@ -16,6 +17,12 @@
 .match p {
     margin: 0;
     font-size: 0.8rem;
+}
+
+.match:hover {
+    background-color: var(--accent-hover-card);
+    transform: translateY(-2px);
+    transition-duration: 200ms;
 }
 
 .match-result {
